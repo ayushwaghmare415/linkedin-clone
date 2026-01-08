@@ -149,16 +149,16 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 	};
 
 	return (
-		<div className='bg-white shadow rounded-lg mb-6'>
+		<div className='bg-white shadow rounded-lg mb-3 sm:mb-6'>
 			<div
-				className='relative h-48 rounded-t-lg bg-cover bg-center'
+				className='relative h-24 sm:h-48 rounded-t-lg bg-cover bg-center'
 				style={{
 					backgroundImage: `url('${editedData.bannerImg || userData.bannerImg || "/banner.png"}')`,
 				}}
 			>
 				{isEditing && (
-					<label className='absolute top-2 right-2 bg-white p-2 rounded-full shadow cursor-pointer'>
-						<Camera size={20} />
+					<label className='absolute top-2 right-2 bg-white p-2 rounded-full shadow cursor-pointer hover:bg-gray-100'>
+						<Camera size={18} />
 						<input
 							type='file'
 							className='hidden'
@@ -170,17 +170,17 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 				)}
 			</div>
 
-			<div className='p-4'>
-				<div className='relative -mt-20 mb-4'>
+			<div className='p-3 sm:p-4'>
+				<div className='relative -mt-12 sm:-mt-20 mb-3 sm:mb-4'>
 					<img
-						className='w-32 h-32 rounded-full mx-auto object-cover'
+						className='w-20 sm:w-32 h-20 sm:h-32 rounded-full mx-auto object-cover border-4 border-white'
 						src={editedData.profilePicture || userData.profilePicture || "/avatar.png"}
 						alt={userData.name}
 					/>
 
 					{isEditing && (
-						<label className='absolute bottom-0 right-1/2 transform translate-x-16 bg-white p-2 rounded-full shadow cursor-pointer'>
-							<Camera size={20} />
+						<label className='absolute bottom-0 right-1/2 transform translate-x-10 sm:translate-x-16 bg-white p-2 rounded-full shadow cursor-pointer hover:bg-gray-100'>
+							<Camera size={16} />
 							<input
 								type='file'
 								className='hidden'
@@ -192,16 +192,16 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 					)}
 				</div>
 
-				<div className='text-center mb-4'>
+				<div className='text-center mb-3 sm:mb-4'>
 					{isEditing ? (
 						<input
 							type='text'
 							value={editedData.name ?? userData.name}
 							onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
-							className='text-2xl font-bold mb-2 text-center w-full'
+							className='text-lg sm:text-2xl font-bold mb-2 text-center w-full'
 						/>
 					) : (
-						<h1 className='text-2xl font-bold mb-2'>{userData.name}</h1>
+						<h1 className='text-lg sm:text-2xl font-bold mb-2'>{userData.name}</h1>
 					)}
 
 					{isEditing ? (
@@ -209,14 +209,14 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 							type='text'
 							value={editedData.headline ?? userData.headline}
 							onChange={(e) => setEditedData({ ...editedData, headline: e.target.value })}
-							className='text-gray-600 text-center w-full'
+							className='text-gray-600 text-center w-full text-sm sm:text-base'
 						/>
 					) : (
-						<p className='text-gray-600'>{userData.headline}</p>
+						<p className='text-gray-600 text-sm sm:text-base'>{userData.headline}</p>
 					)}
 
-					<div className='flex justify-center items-center mt-2'>
-						<MapPin size={16} className='text-gray-500 mr-1' />
+					<div className='flex justify-center items-center mt-2 text-sm sm:text-base'>
+						<MapPin size={14} className='text-gray-500 mr-1 flex-shrink-0' />
 						{isEditing ? (
 							<input
 								type='text'
@@ -233,8 +233,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 				{isOwnProfile ? (
 					isEditing ? (
 						<button
-							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-primary-dark
-							 transition duration-300'
+							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 text-sm sm:text-base'
 							onClick={handleSave}
 						>
 							Save Profile
@@ -242,8 +241,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 					) : (
 						<button
 							onClick={() => setIsEditing(true)}
-							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-primary-dark
-							 transition duration-300'
+							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-blue-700 transition duration-300 text-sm sm:text-base'
 						>
 							Edit Profile
 						</button>

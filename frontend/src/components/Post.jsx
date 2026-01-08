@@ -87,91 +87,91 @@ const Post = ({ post }) => {
 	};
 
 	return (
-		<div className='bg-secondary rounded-lg shadow mb-4'>
-			<div className='p-4'>
-				<div className='flex items-center justify-between mb-4'>
-					<div className='flex items-center'>
+		<div className='bg-secondary rounded-lg shadow mb-3 sm:mb-4'>
+			<div className='p-3 sm:p-4'>
+				<div className='flex items-center justify-between gap-2 mb-3 sm:mb-4'>
+					<div className='flex items-center gap-2 min-w-0'>
 						<Link to={`/profile/${post?.author?.username}`}>
 							<img
 								src={post.author.profilePicture || "/avatar.png"}
 								alt={post.author.name}
-								className='size-10 rounded-full mr-3'
+								className='size-8 sm:size-10 rounded-full flex-shrink-0'
 							/>
 						</Link>
 
-						<div>
+						<div className='min-w-0'>
 							<Link to={`/profile/${post?.author?.username}`}>
-								<h3 className='font-semibold'>{post.author.name}</h3>
+								<h3 className='font-semibold text-xs sm:text-sm line-clamp-1'>{post.author.name}</h3>
 							</Link>
-							<p className='text-xs text-info'>{post.author.headline}</p>
+							<p className='text-xs text-info line-clamp-1'>{post.author.headline}</p>
 							<p className='text-xs text-info'>
 								{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
 							</p>
 						</div>
 					</div>
 					{isOwner && (
-						<button onClick={handleDeletePost} className='text-red-500 hover:text-red-700'>
-							{isDeletingPost ? <Loader size={18} className='animate-spin' /> : <Trash2 size={18} />}
+						<button onClick={handleDeletePost} className='text-red-500 hover:text-red-700 flex-shrink-0'>
+							{isDeletingPost ? <Loader size={16} className='animate-spin' /> : <Trash2 size={16} />}
 						</button>
 					)}
 				</div>
-				<p className='mb-4'>{post.content}</p>
-				{post.image && <img src={post.image} alt='Post content' className='rounded-lg w-full mb-4' />}
+				<p className='mb-3 sm:mb-4 text-sm sm:text-base'>{post.content}</p>
+				{post.image && <img src={post.image} alt='Post content' className='rounded-lg w-full mb-3 sm:mb-4' />}
 
-				<div className='flex justify-between text-info'>
+				<div className='flex justify-between text-info text-xs sm:text-sm'>
 					<PostAction
-						icon={<ThumbsUp size={18} className={isLiked ? "text-blue-500  fill-blue-300" : ""} />}
+						icon={<ThumbsUp size={16} className={isLiked ? "text-blue-500  fill-blue-300" : ""} />}
 						text={`Like (${post.likes.length})`}
 						onClick={handleLikePost}
 					/>
 
 					<PostAction
-						icon={<MessageCircle size={18} />}
+						icon={<MessageCircle size={16} />}
 						text={`Comment (${comments.length})`}
 						onClick={() => setShowComments(!showComments)}
 					/>
-					<PostAction icon={<Share2 size={18} />} text='Share' />
+					<PostAction icon={<Share2 size={16} />} text='Share' />
 				</div>
 			</div>
 
 			{showComments && (
-				<div className='px-4 pb-4'>
-					<div className='mb-4 max-h-60 overflow-y-auto'>
+				<div className='px-3 sm:px-4 pb-3 sm:pb-4 border-t border-base-100'>
+					<div className='mb-3 sm:mb-4 max-h-60 overflow-y-auto'>
 						{comments.map((comment) => (
-							<div key={comment._id} className='mb-2 bg-base-100 p-2 rounded flex items-start'>
+							<div key={comment._id} className='mb-2 bg-base-100 p-2 rounded flex items-start gap-2'>
 								<img
 									src={comment.user.profilePicture || "/avatar.png"}
 									alt={comment.user.name}
-									className='w-8 h-8 rounded-full mr-2 flex-shrink-0'
+									className='w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0'
 								/>
-								<div className='flex-grow'>
-									<div className='flex items-center mb-1'>
-										<span className='font-semibold mr-2'>{comment.user.name}</span>
+								<div className='flex-grow min-w-0'>
+									<div className='flex items-center gap-2 mb-1 flex-wrap'>
+										<span className='font-semibold text-xs sm:text-sm'>{comment.user.name}</span>
 										<span className='text-xs text-info'>
 											{formatDistanceToNow(new Date(comment.createdAt))}
 										</span>
 									</div>
-									<p>{comment.content}</p>
+									<p className='text-xs sm:text-sm'>{comment.content}</p>
 								</div>
 							</div>
 						))}
 					</div>
 
-					<form onSubmit={handleAddComment} className='flex items-center'>
+					<form onSubmit={handleAddComment} className='flex items-center gap-2'>
 						<input
 							type='text'
 							value={newComment}
 							onChange={(e) => setNewComment(e.target.value)}
 							placeholder='Add a comment...'
-							className='flex-grow p-2 rounded-l-full bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary'
+							className='flex-grow p-2 text-sm rounded-l-full bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary'
 						/>
 
 						<button
 							type='submit'
-							className='bg-primary text-white p-2 rounded-r-full hover:bg-primary-dark transition duration-300'
+							className='bg-primary text-white p-2 rounded-r-full hover:bg-blue-700 transition duration-300 flex-shrink-0'
 							disabled={isAddingComment}
 						>
-							{isAddingComment ? <Loader size={18} className='animate-spin' /> : <Send size={18} />}
+							{isAddingComment ? <Loader size={16} className='animate-spin' /> : <Send size={16} />}
 						</button>
 					</form>
 				</div>

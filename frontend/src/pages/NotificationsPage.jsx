@@ -96,41 +96,41 @@ const NotificationsPage = () => {
 	};
 
 	return (
-		<div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
-			<div className='col-span-1 lg:col-span-1'>
+		<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6'>
+			<div className='col-span-1 hidden lg:block lg:col-span-1'>
 				<Sidebar user={authUser} />
 			</div>
-			<div className='col-span-1 lg:col-span-3'>
-				<div className='bg-white rounded-lg shadow p-6'>
-					<h1 className='text-2xl font-bold mb-6'>Notifications</h1>
+			<div className='col-span-1 md:col-span-3 lg:col-span-3'>
+				<div className='bg-white rounded-lg shadow p-3 sm:p-6'>
+					<h1 className='text-xl sm:text-2xl font-bold mb-4 sm:mb-6'>Notifications</h1>
 
 					{isLoading ? (
-						<p>Loading notifications...</p>
+						<p className='text-sm'>Loading notifications...</p>
 					) : notifications && notifications.data.length > 0 ? (
-						<ul>
+						<ul className='space-y-2 sm:space-y-4'>
 							{notifications.data.map((notification) => (
 								<li
 									key={notification._id}
-									className={`bg-white border rounded-lg p-4 my-4 transition-all hover:shadow-md ${
-										!notification.read ? "border-blue-500" : "border-gray-200"
+									className={`bg-white border rounded-lg p-3 sm:p-4 transition-all hover:shadow-md ${
+										!notification.read ? "border-blue-500 bg-blue-50" : "border-gray-200"
 									}`}
 								>
-									<div className='flex items-start justify-between'>
-										<div className='flex items-center space-x-4'>
+									<div className='flex items-start justify-between gap-2'>
+										<div className='flex items-start gap-2 sm:gap-4 min-w-0 flex-1'>
 											<Link to={`/profile/${notification.relatedUser.username}`}>
 												<img
 													src={notification.relatedUser.profilePicture || "/avatar.png"}
 													alt={notification.relatedUser.name}
-													className='w-12 h-12 rounded-full object-cover'
+													className='w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover flex-shrink-0'
 												/>
 											</Link>
 
-											<div>
-												<div className='flex items-center gap-2'>
-													<div className='p-1 bg-gray-100 rounded-full'>
+											<div className='min-w-0 flex-1'>
+												<div className='flex items-center gap-2 mb-1'>
+													<div className='p-1 bg-gray-100 rounded-full flex-shrink-0'>
 														{renderNotificationIcon(notification.type)}
 													</div>
-													<p className='text-sm'>{renderNotificationContent(notification)}</p>
+													<p className='text-xs sm:text-sm'>{renderNotificationContent(notification)}</p>
 												</div>
 												<p className='text-xs text-gray-500 mt-1'>
 													{formatDistanceToNow(new Date(notification.createdAt), {
@@ -141,14 +141,14 @@ const NotificationsPage = () => {
 											</div>
 										</div>
 
-										<div className='flex gap-2'>
+										<div className='flex gap-1 flex-shrink-0'>
 											{!notification.read && (
 												<button
 													onClick={() => markAsReadMutation(notification._id)}
 													className='p-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 transition-colors'
 													aria-label='Mark as read'
 												>
-													<Eye size={16} />
+													<Eye size={14} />
 												</button>
 											)}
 
@@ -157,7 +157,7 @@ const NotificationsPage = () => {
 												className='p-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors'
 												aria-label='Delete notification'
 											>
-												<Trash2 size={16} />
+												<Trash2 size={14} />
 											</button>
 										</div>
 									</div>
@@ -165,11 +165,12 @@ const NotificationsPage = () => {
 							))}
 						</ul>
 					) : (
-						<p>No notification at the moment.</p>
+						<p className='text-sm text-gray-600'>No notification at the moment.</p>
 					)}
 				</div>
 			</div>
 		</div>
 	);
 };
+
 export default NotificationsPage;

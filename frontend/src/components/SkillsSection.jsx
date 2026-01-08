@@ -23,17 +23,17 @@ const SkillsSection = ({ userData, isOwnProfile, onSave }) => {
 	};
 
 	return (
-		<div className='bg-white shadow rounded-lg p-6'>
-			<h2 className='text-xl font-semibold mb-4'>Skills</h2>
-			<div className='flex flex-wrap'>
+		<div className='bg-white shadow rounded-lg p-3 sm:p-6'>
+			<h2 className='text-base sm:text-xl font-semibold mb-3 sm:mb-4'>Skills</h2>
+			<div className='flex flex-wrap gap-2'>
 				{skills.map((skill, index) => (
 					<span
 						key={index}
-						className='bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm mr-2 mb-2 flex items-center'
+						className='bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs sm:text-sm flex items-center gap-1'
 					>
 						{skill}
 						{isEditing && (
-							<button onClick={() => handleDeleteSkill(skill)} className='ml-2 text-red-500'>
+							<button onClick={() => handleDeleteSkill(skill)} className='text-red-500 hover:text-red-700'>
 								<X size={14} />
 							</button>
 						)}
@@ -42,17 +42,17 @@ const SkillsSection = ({ userData, isOwnProfile, onSave }) => {
 			</div>
 
 			{isEditing && (
-				<div className='mt-4 flex'>
+				<div className='mt-3 sm:mt-4 flex gap-2'>
 					<input
 						type='text'
 						placeholder='New Skill'
 						value={newSkill}
 						onChange={(e) => setNewSkill(e.target.value)}
-						className='flex-grow p-2 border rounded-l'
+						className='flex-grow p-2 border rounded-l text-sm'
 					/>
 					<button
 						onClick={handleAddSkill}
-						className='bg-primary text-white py-2 px-4 rounded-r hover:bg-primary-dark transition duration-300'
+						className='bg-primary text-white py-2 px-4 rounded-r hover:bg-blue-700 transition duration-300 text-sm whitespace-nowrap'
 					>
 						Add Skill
 					</button>
@@ -64,14 +64,14 @@ const SkillsSection = ({ userData, isOwnProfile, onSave }) => {
 					{isEditing ? (
 						<button
 							onClick={handleSave}
-							className='mt-4 bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark transition duration-300'
+							className='mt-3 sm:mt-4 bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-sm'
 						>
 							Save Changes
 						</button>
 					) : (
 						<button
 							onClick={() => setIsEditing(true)}
-							className='mt-4 text-primary hover:text-primary-dark transition duration-300'
+							className='mt-3 sm:mt-4 text-primary hover:text-blue-700 transition duration-300 text-sm'
 						>
 							Edit Skills
 						</button>

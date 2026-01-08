@@ -42,12 +42,14 @@ const ProfilePage = () => {
 	};
 
 	return (
-		<div className='max-w-4xl mx-auto p-4'>
-			<ProfileHeader userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-			<AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-			<ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-			<EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-			<SkillsSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+		<div className='max-w-4xl mx-auto p-2 sm:p-4'>
+			<div className='space-y-3 sm:space-y-4'>
+				<ProfileHeader userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+				<AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+				<ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+				<EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+				<SkillsSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+			</div>
 		</div>
 	);
 };
